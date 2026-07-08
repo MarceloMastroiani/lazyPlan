@@ -146,15 +146,19 @@ class MainScreen(Screen):
 
     # ── Actions ──────────────────────────────────────────────────────────────
 
+    # Binding para mover arriba/abajo en la tabla
     def action_move_down(self) -> None:
         self.query_one(DataTable).action_scroll_down()
 
+    # Binding para mover arriba/abajo en la tabla
     def action_move_up(self) -> None:
         self.query_one(DataTable).action_scroll_up()
 
+    # Binding para enfocar el buscador
     def action_focus_search(self) -> None:
         self.query_one("#search", Input).focus()
 
+    # Binding para limpiar el buscador
     def action_clear_search(self) -> None:
         search = self.query_one("#search", Input)
         if search.value:
@@ -162,27 +166,33 @@ class MainScreen(Screen):
         else:
             self.query_one(DataTable).focus()
 
+    # Binding para crear un nuevo proyecto
     def action_new_project(self) -> None:
         self.app.push_screen("editor")
 
+    # Binding para abrir el detalle del proyecto seleccionado
     def action_open_detail(self) -> None:
         project = self._selected_project()
         if project:
             self.app.push_screen("detail", project)
 
+    # Binding para editar el proyecto seleccionado
     def action_edit_project(self) -> None:
         project = self._selected_project()
         if project:
             self.app.push_screen("editor", project)
 
+    # Binding para eliminar el proyecto seleccionado
     def action_delete_project(self) -> None:
         project = self._selected_project()
         if project:
             self.app.push_screen("confirm_delete", project)
 
+    # Binding para salir de la app
     def action_quit_app(self) -> None:
         self.app.exit()
 
+    # Evento cuando se selecciona una fila
     def on_data_table_row_selected(self, event: DataTable.RowSelected) -> None:
         project = self._selected_project()
         if project:

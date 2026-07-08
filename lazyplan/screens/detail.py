@@ -22,36 +22,80 @@ class DetailScreen(Screen):
 
     def compose(self) -> ComposeResult:
         p = self._project
-        created = p.created_at[:16].replace("T", " ") if p.created_at else "—"
-        updated = p.updated_at[:16].replace("T", " ") if p.updated_at else "—"
+        created = p.created_at[:10].replace("-", "/") if p.created_at else "—"
+        updated = p.updated_at[:10].replace("-", "/") if p.updated_at else "—"
+        links   = "\n".join(f"• {l}" for l in p.links) if p.links else "—"
 
         yield ScrollableContainer(
             Vertical(
-                Static(f" 💤 LazyPlan  ›  {p.title}", id="detail-title"),
+                # ── Bloque 1: Header ─────────────────────────────
                 Horizontal(
+                    Static(f"💤 lazyplan >> {p.title}", id="detail-title"),
                     Static(p.status_label, id="status-badge"),
-                    Static(f"ID: {p.id}", id="id-badge"),
-                    id="badges",
+                    id="detail-header",
                 ),
-                self._field("📝  Descripción", p.description or "Sin descripción."),
-                self._field("🔧  Stack",        p.stack_str),
-                self._field("🔗  Links",        "\n".join(p.links) if p.links else "—"),
-                self._field("🐙  GitHub",       p.github_url or "—"),
-                self._field("📁  Carpeta",      p.folder_path or "—"),
+ 
+                # ── Bloque 2: Descripción ─────────────────────────
+                Vertical(
+                    Static(" Descripción", classes="block-title"),
+                    Static(p.description or "No especificado.", id="detail-desc"),
+                    id="desc-block",
+                ),
+ 
+                # ── Bloque 3: Información + Metadatos ─────────────
                 Horizontal(
-                    self._field("📅  Creado",   created, small=True),
-                    self._field("✏️  Editado",  updated, small=True),
-                    id="meta-row",
+                    Vertical(
+                        Static(" Información", classes="block-title"),
+                        Static("Stack", classes="field-label"),
+                        Static(p.stack_str or "—", classes="field-value"),
+                        Static("GitHub", classes="field-label"),
+                        Static(p.github_url or "—", classes="field-value"),
+                        id="col-info",
+                        classes="detail-col",
+                    ),
+                    Vertical(
+                        Static(" Metadatos", classes="block-title"),
+                        Static("Estado",         classes="field-label"),
+                        Static(p.status_label,   classes="field-value"),
+                        Static("Carpeta",        classes="field-label"),
+                        Static(p.folder_path or "—", classes="field-value"),
+                        id="col-meta",
+                        classes="detail-col",
+                    ),
+                    id="info-block",
                 ),
+ 
+                # ── Bloque 4: Links + Fechas ──────────────────────
+                Horizontal(
+                    Vertical(
+                        Static(" Links", classes="block-title"),
+                        Static(links or "—", id="detail-links"),
+                        id="col-links",
+                        classes="detail-col",
+                    ),
+                    Vertical(
+                        Static(" Fechas", classes="block-title"),
+                        Static("Creado",         classes="field-label"),
+                        Static(created,          classes="field-value"),
+                        Static("Editado",        classes="field-label"),
+                        Static(updated,          classes="field-value"),
+                        id="col-dates",
+                        classes="detail-col",
+                    ),
+                    id="links-block",
+                ),
+ 
                 Static(
-                    "[dim]e=editar  d=eliminar  escape=volver[/dim]",
+                    "[dim]e=editar  d=eliminar  esc=volver[/dim]",
                     id="detail-hint",
                 ),
+ 
                 id="detail-content",
             ),
             id="detail-scroll",
         )
         yield Footer()
+
 
     def _field(self, label: str, value: str, small: bool = False) -> Vertical:
         cls = "field-small" if small else "field"

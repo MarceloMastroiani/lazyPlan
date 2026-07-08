@@ -1,3 +1,5 @@
+
+from textual.theme import Theme
 from textual.app import App
 
 from lazyplan.models import Project
@@ -7,12 +9,34 @@ from lazyplan.screens.detail import DetailScreen
 from lazyplan.screens.editor import EditorScreen
 from lazyplan.screens.confirm_delete import ConfirmDeleteScreen
 
+arctic_theme = Theme(
+    name="onyx-violet",
+    primary="#A78BFA",       
+    secondary="#7C3AED",    
+    accent="#C4B5FD",     
+    background="#0C0C10",   
+    surface="#16151D",      
+    panel="#100F17",        
+    foreground="#EDEDF0",   
+    boost="#0A0912",        
+    success="#4ADE80",
+    warning="#FCD34D",
+    error="#F87171",
+    dark=True,
+    variables={
+        "block-cursor-text-style": "none",
+        "footer-key-foreground": "#A78BFA",
+        "input-selection-background": "#A78BFA 35%",
+    }
+)
+
 
 class LazyPlanApp(App):
     """TUI para capturar y gestionar ideas de proyectos."""
 
-    CSS_PATH = "lazyplan.css"
+    CSS_PATH = "lazyplan.tcss"
     TITLE    = "LazyPlan"
+    DARK = True
 
     SCREENS = {
         "main":           MainScreen,
@@ -26,6 +50,8 @@ class LazyPlanApp(App):
         self._projects = load_projects()
 
     def on_mount(self) -> None:
+        self.register_theme(arctic_theme)
+        self.theme = "onyx-violet"
         self.push_screen(MainScreen(self._projects))
 
     # ── Screen helpers ────────────────────────────────────────────────────────

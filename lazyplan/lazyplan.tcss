@@ -1,0 +1,264 @@
+
+
+
+
+/* ── Global ─────────────────────────────────────────────── */
+Screen {
+    background: $background;
+    overflow-y: auto;
+}
+/* ── Main screen ────────────────────────────────────────── */
+#main-layout {
+    height: 1fr;
+}
+
+#app-title {
+    color: $primary;
+    text-style: bold;
+    height: 1;
+    margin-bottom: 1;
+    margin-top: 1;
+}
+
+
+#search-bar {
+    height: 3;
+    padding: 0 1;
+    margin-bottom: 1;
+}
+#search {
+    width: 1fr;
+    border: round $secondary;
+    background: $background;
+    &:focus {
+        background-tint: $background;
+    }
+}
+
+#filter-bar {
+    height: 1;
+    padding: 0 2;
+    align: left middle;
+}
+#filter-label {
+    margin-right: 1;
+    color: $foreground;
+}
+.filter-btn {
+    padding: 0 2;
+    margin-right: 1;
+    color: $foreground;
+}
+.filter-btn.active {
+    color: $primary;
+    text-style: bold underline;
+    background: $boost;
+}
+
+#project-table {
+    height: 1fr;
+    border: round $secondary;
+    margin-bottom: 1;
+    margin-left: 1;
+    margin-right: 1;
+    background: $background;
+    &:focus {
+        background-tint: $background;
+    }
+}
+#status-bar {
+    padding: 0 2;
+    color: $foreground;
+    margin-bottom: 1;
+}
+
+
+/* ── Detail screen ──────────────────────────────────────── */
+#detail-scroll {
+    height: 1fr;
+    overflow-y: auto;
+    background: $background;
+}
+#detail-content {
+    padding: 1 2;
+    height: auto;
+}
+/* Bloque 1 — Header */
+#detail-header {
+    height: 3;
+    background: $boost;
+    border: round $secondary;
+    margin-bottom: 1;
+}
+
+#detail-title {
+    color: #FFF;
+    text-style: bold;
+    width: 1fr;
+    content-align: left middle;
+}
+    
+#status-badge {
+    color: $primary;
+    text-style: bold;
+    content-align: right middle;
+    width: 1fr;
+    padding: 0 1;
+}
+#badges {
+    height: 2;
+    margin-bottom: 0;
+    background: $boost;
+}
+
+#id-badge {
+    color: $foreground;
+}
+/* Bloque 2 — Descripción */
+#desc-block {
+    border: round $secondary;
+    background: $boost;
+    margin-bottom: 1;
+    padding: 0 2 0 2;
+    height: auto;
+    max-height: 10;
+}
+/* Bloque 3 — Info + Metadatos */
+#info-block {
+    height: auto;
+    margin-bottom: 1;
+}
+/* Bloque 4 — Links + Fechas */
+#links-block {
+    height: 5;
+    margin-bottom: 1;
+}
+
+/* Columnas compartidas */
+.detail-col {
+    width: 1fr;
+    border: round $secondary;
+    background: $boost;
+    padding: 0 2;
+    height: auto;
+    max-height: 100%;
+}
+/* Títulos de bloque */
+.block-title {
+    color: $foreground;
+    text-style: bold;
+    border-bottom: tall $secondary;
+}
+
+/* Campos */
+.field-label {
+    color: $secondary;
+    height: 1;
+    margin-top: 1;
+}
+
+.field-value {
+    color: $foreground;
+    margin-bottom: 1;
+}
+
+#detail-desc {
+    color: $foreground;
+    margin-top: 1;
+    margin-bottom: 1;
+}
+
+#detail-links {
+    color: $foreground;
+    margin-top: 0;
+    margin-bottom: 1;
+}
+
+#detail-hint {
+    margin-top: 1;
+    color: $secondary;
+    text-align: center;
+    height: 1;
+}
+/* ── Editor screen ──────────────────────────────────────── */
+#editor-scroll {
+    height: 1fr;
+}
+#editor-form {
+    padding: 1 2;
+}
+#editor-title {
+    background: $boost;
+    color: $foreground;
+    text-style: bold;
+    padding: 0 2;
+    height: 1;
+    margin-bottom: 1;
+}
+.form-label {
+    text-style: bold;
+    color: $foreground;
+    margin-top: 1;
+    height: 1;
+}
+.form-hint {
+    color: $foreground;
+    text-style: italic;
+    margin-bottom: 1;
+}
+#input-title {
+    margin-bottom: 0;
+}
+#input-desc {
+    height: 8;
+    border: tall $secondary;
+    margin-bottom: 0;
+}
+#input-stack {
+    margin-bottom: 0;
+}
+#input-status {
+    margin-bottom: 0;
+}
+#input-links {
+    margin-bottom: 0;
+}
+#form-error {
+    height: 1;
+    margin-top: 1;
+}
+#form-buttons {
+    margin-top: 2;
+    height: 3;
+    align: left middle;
+}
+#form-buttons Button {
+    margin-right: 2;
+}
+/* ── Confirm delete modal ───────────────────────────────── */
+ConfirmDeleteScreen {
+    align: center middle;
+}
+#confirm-dialog {
+    width: 50;
+    height: auto;
+    padding: 2 3;
+    border: thick $error;
+    background: $surface;
+}
+#confirm-title {
+    text-style: bold;
+    color: $error;
+    margin-bottom: 1;
+    height: 1;
+}
+#confirm-body {
+    margin-bottom: 2;
+}
+#confirm-buttons {
+    height: 3;
+    align: left middle;
+}
+#confirm-buttons Button {
+    margin-right: 2;
+}
