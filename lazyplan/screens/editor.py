@@ -1,9 +1,11 @@
 from textual.app import ComposeResult
-from textual.screen import Screen
 from textual.widgets import Footer, Input, TextArea, Select, Label, Button, Static
 from textual.binding import Binding
 from textual.containers import Vertical, Horizontal, ScrollableContainer
 from textual import on
+
+from lazyplan.screens.base import BaseScreen
+
 
 from lazyplan.models import Project, Status
 
@@ -25,13 +27,14 @@ STACK_SUGGESTIONS = [
 ]
 
 
-class EditorScreen(Screen):
+class EditorScreen(BaseScreen):
     """Screen para crear o editar un proyecto."""
 
     BINDINGS = [
         Binding("escape",   "cancel",        "Cancelar"),
         Binding("ctrl+s",   "save",          "Guardar"),
     ]
+
 
     def __init__(self, project: Project | None = None):
         super().__init__()
@@ -131,16 +134,16 @@ class EditorScreen(Screen):
         status = self.query_one("#input-status",  Select).value
 
         raw_stack = self.query_one("#input-stack", Input).value
-        stack = [s.strip() for s in raw_stack.split(",") if s.strip()]
+        stack = [stack.strip() for stack in raw_stack.split(",") if stack.strip()]
 
         raw_links = self.query_one("#input-links", Input).value
-        links = [l.strip() for l in raw_links.split(",") if l.strip()]
+        links = [link.strip() for link in raw_links.split(",") if link.strip()]
 
         if self._is_editing and self._project:
             self._project.title       = title
             self._project.description = desc
             self._project.stack       = stack
-            self._project.status      = status
+            self._project.status      = Status(status)
             self._project.links       = links
             self._project.touch()
             project = self._project
@@ -149,9 +152,9 @@ class EditorScreen(Screen):
                 title=title,
                 description=desc,
                 stack=stack,
-                status=status,
+                status=Status(status),
                 links=links,
             )
 
-        self.app.save_project(project)
-        self.app.pop_screen()
+        self.lazyplan.save_project(project)
+        self.lazyplan.pop_screen()

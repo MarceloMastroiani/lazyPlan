@@ -1,14 +1,15 @@
 from textual.app import ComposeResult
-from textual.screen import Screen
 from textual.widgets import DataTable, Input, Footer, Label, Static
 from textual.binding import Binding
 from textual.containers import Vertical, Horizontal
 from textual import on
 
-from lazyplan.models import Project, Status
+from lazyplan.screens.base import BaseScreen
+
+from lazyplan.models import Project
 
 
-class MainScreen(Screen):
+class MainScreen(BaseScreen):
     """Pantalla principal: lista de proyectos."""
 
     BINDINGS = [
@@ -168,25 +169,25 @@ class MainScreen(Screen):
 
     # Binding para crear un nuevo proyecto
     def action_new_project(self) -> None:
-        self.app.push_screen("editor")
+        self.lazyplan.push_screen("editor")
 
     # Binding para abrir el detalle del proyecto seleccionado
     def action_open_detail(self) -> None:
         project = self._selected_project()
         if project:
-            self.app.push_screen("detail", project)
+            self.lazyplan.push_screen("detail", project)
 
     # Binding para editar el proyecto seleccionado
     def action_edit_project(self) -> None:
         project = self._selected_project()
         if project:
-            self.app.push_screen("editor", project)
+            self.lazyplan.push_screen("editor", project)
 
     # Binding para eliminar el proyecto seleccionado
     def action_delete_project(self) -> None:
         project = self._selected_project()
         if project:
-            self.app.push_screen("confirm_delete", project)
+            self.lazyplan.push_screen("confirm_delete", project)
 
     # Binding para salir de la app
     def action_quit_app(self) -> None:
@@ -196,4 +197,4 @@ class MainScreen(Screen):
     def on_data_table_row_selected(self, event: DataTable.RowSelected) -> None:
         project = self._selected_project()
         if project:
-            self.app.push_screen("detail", project)
+            self.lazyplan.push_screen("detail", project)

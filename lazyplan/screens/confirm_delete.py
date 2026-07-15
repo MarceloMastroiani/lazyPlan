@@ -1,14 +1,15 @@
 from textual.app import ComposeResult
-from textual.screen import ModalScreen
 from textual.widgets import Button, Static, Label
 from textual.containers import Vertical, Horizontal
 from textual.binding import Binding
 from textual import on
 
+from lazyplan.screens.base import LazyPlanModalScreen
+
 from lazyplan.models import Project
 
 
-class ConfirmDeleteScreen(ModalScreen):
+class ConfirmDeleteScreen(LazyPlanModalScreen):
     """Modal de confirmación para eliminar un proyecto."""
 
     BINDINGS = [

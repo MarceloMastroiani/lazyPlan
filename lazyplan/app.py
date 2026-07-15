@@ -11,14 +11,14 @@ from lazyplan.screens.confirm_delete import ConfirmDeleteScreen
 
 arctic_theme = Theme(
     name="onyx-violet",
-    primary="#A78BFA",       
-    secondary="#7C3AED",    
-    accent="#C4B5FD",     
-    background="#0C0C10",   
-    surface="#16151D",      
-    panel="#100F17",        
-    foreground="#EDEDF0",   
-    boost="#0A0912",        
+    primary="#A78BFA",
+    secondary="#7C3AED",
+    accent="#C4B5FD",
+    background="#0C0C10",
+    surface="#16151D",
+    panel="#100F17",
+    foreground="#EDEDF0",
+    boost="#0A0912",
     success="#4ADE80",
     warning="#FCD34D",
     error="#F87171",
@@ -38,12 +38,12 @@ class LazyPlanApp(App):
     TITLE    = "LazyPlan"
     DARK = True
 
-    SCREENS = {
-        "main":           MainScreen,
-        "detail":         DetailScreen,
-        "editor":         EditorScreen,
-        "confirm_delete": ConfirmDeleteScreen,
-    }
+    # SCREENS = {
+    #     "main":           MainScreen,
+    #     "detail":         DetailScreen,
+    #     "editor":         EditorScreen,
+    #     "confirm_delete": ConfirmDeleteScreen,
+    # }
 
     def __init__(self):
         super().__init__()
