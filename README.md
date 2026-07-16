@@ -1,4 +1,4 @@
-# 💤 LazyPlan
+# 💤 [LazyPlan](https://pypi.org/project/lazyplan/)
 
 TUI (interfaz de terminal) para capturar y gestionar ideas de proyectos, sin salir de la consola. Anotá una idea en 5 segundos, hacé seguimiento de su estado, y creá el repo en GitHub cuando estés listo para arrancar — todo desde el teclado.
 
