@@ -4,8 +4,9 @@ build-backend = "hatchling.build"
 
 [project]
 name = "lazyplan"
-version = "0.1.0"
+version = "0.1.1"
 description = "TUI para capturar y gestionar ideas de proyectos"
+readme = "README.md"
 authors = [{name = "Marcelo Mastroiani", email = "mastroianimarcelo04@gmail.com"}]
 requires-python = ">=3.11"
 dependencies = [
