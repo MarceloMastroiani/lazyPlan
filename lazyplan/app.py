@@ -8,6 +8,7 @@ from lazyplan.screens.main import MainScreen
 from lazyplan.screens.detail import DetailScreen
 from lazyplan.screens.editor import EditorScreen
 from lazyplan.screens.confirm_delete import ConfirmDeleteScreen
+from lazyplan.screens.github_screen import GithubScreen
 
 arctic_theme = Theme(
     name="onyx-violet",
@@ -43,6 +44,7 @@ class LazyPlanApp(App):
     #     "detail":         DetailScreen,
     #     "editor":         EditorScreen,
     #     "confirm_delete": ConfirmDeleteScreen,
+    #     "github":         GithubScreen,
     # }
 
     def __init__(self):
@@ -66,6 +68,8 @@ class LazyPlanApp(App):
                 screen = EditorScreen(args[0] if args else None)
             elif name == "confirm_delete" and args:
                 screen = ConfirmDeleteScreen(args[0])
+            elif name == "github" and args:
+                screen = GithubScreen(args[0])
             else:
                 screen = self.SCREENS[name]()
         return super().push_screen(screen, **kwargs)

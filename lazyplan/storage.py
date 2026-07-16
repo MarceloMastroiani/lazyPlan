@@ -8,6 +8,7 @@ DATA_DIR = Path.home() / ".local" / "share" / "lazyplan"
 DATA_FILE = DATA_DIR / "projects.json"
 
 
+# Cargar proyectos desde el archivo JSON
 def load_projects() -> list[Project]:
     if not DATA_FILE.exists():
         return []
@@ -26,6 +27,7 @@ def load_projects() -> list[Project]:
         return []
 
 
+# Guardar proyectos en el archivo JSON
 def save_projects(projects: list[Project]) -> None:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     DATA_FILE.write_text(
@@ -37,10 +39,12 @@ def save_projects(projects: list[Project]) -> None:
     )
 
 
+# Buscar un proyecto por su ID
 def find_project(projects: list[Project], project_id: str) -> Project | None:
     return next((p for p in projects if p.id == project_id), None)
 
 
+# Actualizar o insertar un proyecto en la lista
 def upsert_project(projects: list[Project], project: Project) -> list[Project]:
     for i, p in enumerate(projects):
         if p.id == project.id:
@@ -50,5 +54,6 @@ def upsert_project(projects: list[Project], project: Project) -> list[Project]:
     return projects
 
 
+# Eliminar un proyecto de la lista
 def delete_project(projects: list[Project], project_id: str) -> list[Project]:
     return [p for p in projects if p.id != project_id]

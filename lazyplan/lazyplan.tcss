@@ -97,7 +97,7 @@ Screen {
     width: 1fr;
     content-align: left middle;
 }
-    
+
 #status-badge {
     color: $primary;
     text-style: bold;
@@ -130,7 +130,7 @@ Screen {
 }
 /* Bloque 4 — Links + Fechas */
 #links-block {
-    height: 5;
+    height: auto;
     margin-bottom: 1;
 }
 
@@ -170,7 +170,6 @@ Screen {
 
 #detail-links {
     color: $foreground;
-    margin-top: 0;
     margin-bottom: 1;
 }
 
@@ -183,9 +182,12 @@ Screen {
 /* ── Editor screen ──────────────────────────────────────── */
 #editor-scroll {
     height: 1fr;
+    overflow-y: auto;
+    background: $background;
 }
 #editor-form {
     padding: 1 2;
+    height: auto;
 }
 #editor-title {
     background: $boost;
@@ -204,6 +206,7 @@ Screen {
 .form-hint {
     color: $foreground;
     text-style: italic;
+    padding: 0 2;
     margin-bottom: 1;
 }
 #input-title {
@@ -260,5 +263,70 @@ ConfirmDeleteScreen {
     align: left middle;
 }
 #confirm-buttons Button {
+    margin-right: 2;
+}
+
+/* ── GitHub modal ───────────────────────────────────────── */
+
+GithubScreen {
+    align: center middle;
+}
+
+#gh-dialog {
+    width: 60;
+    height: auto;
+    padding: 2 3;
+    border: thick #A78BFA;
+    background: #16151D;
+}
+
+#gh-title {
+    text-style: bold;
+    color: #A78BFA;
+    margin-bottom: 1;
+    height: 1;
+}
+
+#gh-project-label {
+    color: #EDEDF0;
+    margin-bottom: 0;
+    height: 1;
+}
+
+#gh-slug-label {
+    color: #5C5A6E;
+    margin-bottom: 1;
+    height: 1;
+}
+
+#gh-private-row {
+    height: 3;
+    align: left middle;
+    margin-bottom: 1;
+}
+
+#gh-private-label {
+    color: #EDEDF0;
+    margin-right: 2;
+    width: auto;
+    content-align: left middle;
+}
+
+#gh-status {
+    height: 1;
+    margin-bottom: 1;
+}
+
+#gh-error-body {
+    color: #EDEDF0;
+    margin-bottom: 2;
+}
+
+#gh-buttons {
+    height: 3;
+    align: left middle;
+}
+
+#gh-buttons Button {
     margin-right: 2;
 }

@@ -90,12 +90,15 @@ class MainScreen(BaseScreen):
     # ── Filtro y búsqueda ────────────────────────────────────────────────────
 
     def _apply_filters(self, query: str = "") -> None:
+        # Resetear filtros y búsqueda
         q = query.lower().strip()
         result = self._all_projects
 
+        # Filtrar por estado activo si no es "all"
         if self._active_filter != "all":
             result = [p for p in result if p.status.value == self._active_filter]
 
+        # Filtrar por búsqueda si hay texto
         if q:
             result = [
                 p for p in result
@@ -107,7 +110,7 @@ class MainScreen(BaseScreen):
         self._filtered = result
         self._populate_table()
 
-    @on(Input.Changed, "#search")
+    @on(Input.Changed, "#search") # El @on decorador se usa para manejar eventos de cambio en el input de búsqueda
     def on_search_changed(self, event: Input.Changed) -> None:
         self._apply_filters(event.value)
 

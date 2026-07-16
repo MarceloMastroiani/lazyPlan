@@ -1,19 +1,21 @@
 from textual.app import ComposeResult
-from textual.screen import Screen
 from textual.widgets import Footer, Static, Label
 from textual.binding import Binding
 from textual.containers import Vertical, Horizontal, ScrollableContainer
 
+from lazyplan.screens.base import BaseScreen
+
 from lazyplan.models import Project
 
 
-class DetailScreen(Screen):
+class DetailScreen(BaseScreen):
     """Vista de detalle de un proyecto (solo lectura)."""
 
     BINDINGS = [
         Binding("escape", "go_back",      "Volver"),
         Binding("e",      "edit_project", "Editar"),
         Binding("d",      "delete",       "Eliminar"),
+        Binding("ctrl+g", "open_github",  "GitHub"),
     ]
 
     def __init__(self, project: Project):
@@ -24,7 +26,7 @@ class DetailScreen(Screen):
         p = self._project
         created = p.created_at[:10].replace("-", "/") if p.created_at else "—"
         updated = p.updated_at[:10].replace("-", "/") if p.updated_at else "—"
-        links   = "\n".join(f"• {l}" for l in p.links) if p.links else "—"
+        links   = "\n".join(f"• {link}" for link in p.links) if p.links else "—"
 
         yield ScrollableContainer(
             Vertical(
@@ -34,14 +36,14 @@ class DetailScreen(Screen):
                     Static(p.status_label, id="status-badge"),
                     id="detail-header",
                 ),
- 
+
                 # ── Bloque 2: Descripción ─────────────────────────
                 Vertical(
                     Static(" Descripción", classes="block-title"),
                     Static(p.description or "No especificado.", id="detail-desc"),
                     id="desc-block",
                 ),
- 
+
                 # ── Bloque 3: Información + Metadatos ─────────────
                 Horizontal(
                     Vertical(
@@ -64,7 +66,7 @@ class DetailScreen(Screen):
                     ),
                     id="info-block",
                 ),
- 
+
                 # ── Bloque 4: Links + Fechas ──────────────────────
                 Horizontal(
                     Vertical(
@@ -84,12 +86,12 @@ class DetailScreen(Screen):
                     ),
                     id="links-block",
                 ),
- 
+
                 Static(
                     "[dim]e=editar  d=eliminar  esc=volver[/dim]",
                     id="detail-hint",
                 ),
- 
+
                 id="detail-content",
             ),
             id="detail-scroll",
@@ -112,7 +114,10 @@ class DetailScreen(Screen):
 
     def action_edit_project(self) -> None:
         self.app.pop_screen()
-        self.app.push_screen("editor", self._project)
+        self.lazyplan.push_screen("editor", self._project)
 
     def action_delete(self) -> None:
-        self.app.push_screen("confirm_delete", self._project)
+        self.lazyplan.push_screen("confirm_delete", self._project)
+
+    def action_open_github(self) -> None:
+        self.lazyplan.push_screen("github", self._project)

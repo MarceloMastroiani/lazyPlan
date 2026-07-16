@@ -71,7 +71,7 @@ class EditorScreen(BaseScreen):
                     id="input-stack",
                 ),
                 Static(
-                    "Sugerencias: " + "  ·  ".join(STACK_SUGGESTIONS[:12]),
+                    "Sugerencias: " + "  ·  ".join(STACK_SUGGESTIONS[:10]),
                     classes="form-hint",
                 ),
 
